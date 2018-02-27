@@ -2,6 +2,7 @@
 Here you can find the scripts for the Multi-centre Epilepsy Lesion Detection (MELD) project. This is an open science collaborative initiative.
 
 To get started you can clone the github repository into your folder of choice:
+
 `git clone https://github.com/MELDProject/meld`
 
 The protocols to run the data processing can be found on protocols.io (https://www.protocols.io/researchers/meld-project/protocols)
