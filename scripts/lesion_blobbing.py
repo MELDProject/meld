@@ -70,7 +70,7 @@ for h in hemis:
     for s in subject_ids:
        #only do lesion mask is present
         if os.path.isfile(subject_dir + s + '/surf_meld/'+h+'.lesion.mgh'):
-            demo=nb.load(subject_dir+s+'/surf/'+h+'.w-g.pct.mgh')
+            demo=nb.load(subject_dir + s + '/surf_meld/'+h+'.lesion.mgh')
             lesion=io.import_mgh(subject_dir+s+'/surf_meld/'+h+'.lesion.mgh')
             defragged=defrag_surface(lesion,subject_dir+s+'/surf/'+h+'.white')
             #remove medial wall vertices
