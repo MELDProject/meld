@@ -6,6 +6,7 @@
 
 SUBJECT_DIR=$1
 subject_list=$2
+script_dir=$SUBJECT_DIR/../scripts/
 
 cd "$SUBJECT_DIR"
 export SUBJECTS_DIR="$SUBJECT_DIR"
@@ -17,7 +18,7 @@ subjects=$(<"$subject_list")
 for s in $subjects
 do
 
-bbregister --s "$s" --mov "$s" --mov "$s"/mri/brainmask.mgz --reg "$s"/mri/transforms/Identity.dat --init-fsl --t1
+python "$script_dir"create_identity_reg.py "$s"
 
 if [ ! -d  "$s"/surf_meld ];
 then
@@ -37,5 +38,5 @@ mri_vol2surf --src "$s"/mri/lh.lesion.mgz --out "$s"/surf_meld/lh.lesion.mgh --s
 
 done
 
-python lesion_blobbing.py "$SUBJECT_DIR" "$subject_list"
+python "$script_dir"lesion_blobbing.py "$SUBJECT_DIR" "$subject_list"
 
