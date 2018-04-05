@@ -1,10 +1,9 @@
-SUBJECT_DIR=$1
-subject_list=$2
-script_dir=$SUBJECT_DIR/../scripts/
-
+MELD_DIR=$1
+SUBJECT_DIR="$MELD_DIR"/output/
+subject_list="List_subjects.txt"
+script_dir="$MELD_DIR"/scripts/
+echo $SUBJECT_DIR
 cd "$SUBJECT_DIR"
-export SUBJECTS_DIR="$SUBJECT_DIR"
-
 
 ## Import list of subjects
 subjects=$(<"$subject_list")

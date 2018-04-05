@@ -69,12 +69,12 @@ hemis=['lh','rh']
 for h in hemis:
     for s in subject_ids:
        #only do lesion mask is present
-        if os.path.isfile(subject_dir + s + '/surf_meld/'+h+'.lesion.mgh'):
-            demo=nb.load(subject_dir + s + '/surf_meld/'+h+'.lesion.mgh')
-            lesion=io.import_mgh(subject_dir+s+'/surf_meld/'+h+'.lesion.mgh')
-            defragged=defrag_surface(lesion,subject_dir+s+'/surf/'+h+'.white')
+        if os.path.isfile(os.path.join(subject_dir, s, 'surf_meld/',h+'.lesion.mgh')):
+            demo=nb.load(os.path.join(subject_dir, s, 'surf_meld/',h+'.lesion.mgh'))
+            lesion=io.import_mgh(os.path.join(subject_dir, s, 'surf_meld/',h+'.lesion.mgh'))
+            defragged=defrag_surface(lesion,os.path.join(subject_dir,s,'surf/',h+'.white'))
             #remove medial wall vertices
 #            cortex=nb.freesurfer.io.read_label(subject_dir + s + '/label/'+h+'.cortex.label')
 #            defragged[~cortex]=0
-            io.save_mgh(subject_dir+s+'/surf_meld/'+h+'.lesion_linked.mgh',defragged,demo)
+            io.save_mgh(os.path.join(subject_dir,s,'surf_meld/',h+'.lesion_linked.mgh'),defragged,demo)
 
