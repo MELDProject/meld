@@ -4,9 +4,9 @@
 
 
 
-SUBJECT_DIR=$1
+SUBJECT_DIR=$1/output/
 subject_list=$2
-script_dir=$SUBJECT_DIR/../scripts/
+script_dir=$1/scripts/
 
 cd "$SUBJECT_DIR"
 export SUBJECTS_DIR="$SUBJECT_DIR"
