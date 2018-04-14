@@ -37,7 +37,4 @@ python "$script_dir"normalise_by_controls.py "$subjects_dir" "$subject_ids" "$sc
 
 #create training_data matrix for all patients and controls.
 echo "creating final training data matrix"
-python "$script_dir"create_training_data_split.py "$subjects_dir" "$subject_ids" "$subjects_dir"MELD_"$site_code"_C_featurematrix.txt "$subjects_dir"MELD_"$site_code"_FCD_featurematrix.txt
-
-
-
+python "$script_dir"create_training_data_hdf5.py "$subjects_dir" "$subject_ids"

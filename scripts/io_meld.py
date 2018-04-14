@@ -74,3 +74,64 @@ def load_subject_features(fs_id,features,subject_number,medial_wall,subjects_dir
         feature_matrix[h_index*n_vert : n_vert*(h_index+1),:]=hemisphere_feature_matrix
     return feature_matrix
 
+
+def get_sitecode(fs_id):
+    site_code=fs_id.split('_')[1]
+    if site_code[0] != 'H':
+        print 'site code from subject id does not fit format "H<num>". please double check'
+        site_code='false'
+    return site_code
+
+def get_cp(fs_id):
+    cp=fs_id.split('_')[3]
+    if cp in ("FCD" , "fcd"):
+        c_p='patient'
+    elif cp in ("C" , "c"):
+        c_p='control'
+    else:
+        print 'subject '+ fs_id + ' cannot be identified as either patient or control...'
+        print 'Please double check the IDs in the list of subjects'
+        c_p='false'
+    return c_p
+
+def get_scanner(fs_id):
+    sc=fs_id.split('_')[2]
+    if sc in ("15T" , "1.5T" , "15t" , "1.5t" ):
+        scanner="15T"
+    elif sc in ("3T" , "3t" ):
+        scanner="3T"
+    else:
+        print 'scanner for subject '+ fs_id + ' cannot be identified as either 1.5T or 3T...'
+        print 'Please double check the IDs in the list of subjects'
+        scanner='false'
+    return scanner
+
+def save_subject(fs_id,features,medial_wall,subject_dir):
+    n_vert=163842
+    #get subject info from id
+    c_p=get_cp(fs_id)
+    scanner=get_scanner(fs_id)
+    site_code=get_sitecode(fs_id)
+    #skip subject if info not available
+    if 'false' in (c_p, scanner, site_code):
+        print "Skipping subject " + fs_id
+    hemis=['lh','rh']
+    f=h5py.File(os.path.join(subject_dir,site_code+"_"+c_p+"_featurematrix.hdf5"))
+    for h in hemis:
+        group=f.require_group(os.path.join(site_code,scanner,c_p,fs_id,h))
+        for f_name in features:
+            try :
+                feature = import_mgh(os.path.join(subject_dir,fs_id,'xhemi/surf_meld',h+f_name))
+                feature[medial_wall]=0
+                dset=group.require_dataset(f_name,shape=(n_vert,), dtype='float32',compression="gzip", compression_opts=9)
+                dset[:]=feature
+            except nb.py3k.FileNotFoundError:
+                if "FLAIR" not in f_name:
+                    print('Expected feature '+ f_name + ' was not found. One step in the pipeline has failed')
+        lesion_name=os.path.join(subject_dir,fs_id,'xhemi/surf_meld',h+'.on_lh.lesion.mgh')
+        if os.path.isfile(lesion_name):
+            lesion = import_mgh(lesion_name)
+            dset=group.require_dataset('.on_lh.lesion.mgh',shape=(n_vert,), dtype='float32',compression="gzip", compression_opts=9)
+            dset[:]=lesion
+    f.close()
+    return
