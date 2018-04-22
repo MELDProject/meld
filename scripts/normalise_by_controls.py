@@ -32,6 +32,10 @@ cortex=nb.freesurfer.io.read_label(subject_dir + 'fsaverage_sym/label/lh.cortex.
 
 #check if FLAIR
 for fs_id in subject_ids:
+    if '3T' in fs_id:
+        f='3T'
+    elif '15T' in fs_id:
+        f='15T'
     if os.path.isfile(subject_dir + fs_id + '/xhemi/surf_meld/lh.on_lh.intra_z.gm_FLAIR_0.75.sm10.mgh'):
         measures=['.on_lh.intra_z.thickness.sm10.mgh', '.asym.on_lh.intra_z.thickness.sm10.mgh',
               '.on_lh.intra_z.w-g.pct.sm10.mgh','.asym.on_lh.intra_z.w-g.pct.sm10.mgh',
@@ -53,8 +57,8 @@ for fs_id in subject_ids:
     demo=nb.load(subject_dir+fs_id+'/xhemi/surf_meld/'+hemis[0]+measures[0])
     for h in hemis:
         for m in measures:
-            control_mu=io.load_mgh(control_dir+h+'.mu'+m)
-            control_std=io.load_mgh(control_dir+h+'.std'+m)
+            control_mu=io.load_mgh(os.path.join(control_dir,f,h+'.mu'+m))
+            control_std=io.load_mgh(os.path.join(control_dir,f,h+'.std'+m))
             subject_measure=io.load_mgh(subject_dir+fs_id+'/xhemi/surf_meld/'+h+m)
             z_measure=np.divide((subject_measure-control_mu),control_std,out=np.zeros_like(subject_measure), where=control_std!=0)
             io.save_mgh(subject_dir+fs_id+'/xhemi/surf_meld/'+h+'.inter_z'+m,z_measure,demo)

@@ -1,6 +1,7 @@
 import numpy as np
 import nibabel as nb
 import os
+import h5py
 
 def load_mgh(filename):
     """ import mgh file using nibabel. returns flattened data array"""

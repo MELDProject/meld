@@ -17,12 +17,6 @@ parser.add_argument('subject_dir', type=str,
 parser.add_argument('subject_ids',
                     type=str,
                     help='textfile containing list of subject ids')
-parser.add_argument('controloutput',
-                    type=str,
-                    help='control output filename')
-parser.add_argument('fcdoutput',
-                    type=str,
-                    help='control output filename')
 
 args = parser.parse_args()
 
@@ -46,7 +40,7 @@ features = np.array(['.inter_z.on_lh.intra_z.thickness.sm10.mgh', '.inter_z.asym
                      '.inter_z.asym.on_lh.intra_z.gm_FLAIR_0.25.sm10.mgh','.inter_z.asym.on_lh.intra_z.gm_FLAIR_0.sm10.mgh',
                      '.inter_z.asym.on_lh.intra_z.wm_FLAIR_0.5.sm10.mgh','.inter_z.asym.on_lh.intra_z.wm_FLAIR_1.sm10.mgh',
     '.on_lh.thickness.mgh', '.on_lh.w-g.pct.mgh', '.on_lh.curv.mgh','.on_lh.sulc.mgh',
-    '.on_lh.gm_FLAIR_0.75.mgh', '.on_lh.gm_FLAIR_0.5.mgh', '.on_lh.gm_FLAIR_0.25.mgh'
+    '.on_lh.gm_FLAIR_0.75.mgh', '.on_lh.gm_FLAIR_0.5.mgh', '.on_lh.gm_FLAIR_0.25.mgh',
     '.on_lh.gm_FLAIR_0.mgh', '.on_lh.wm_FLAIR_0.5.mgh', '.on_lh.wm_FLAIR_1.mgh',
     '.on_lh.pial.K_filtered.sm20.mgh'])
 n_vert=163842
@@ -58,7 +52,7 @@ medial_wall = np.delete(np.arange(n_vert),cortex_label)
 
 for subject in subject_ids:
     print "saving subject " + subject + "..."
-    save_subject(subject,features,medial_wall,subject_dir)
+    io.save_subject(subject,features,medial_wall,subject_dir)
 
 
 

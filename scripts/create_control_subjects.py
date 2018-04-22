@@ -72,8 +72,8 @@ for f in fields:
                 control_data[k]=io.import_mgh(subject_dir+s+'/xhemi/surf_meld/'+h+m)
             mean=np.mean(control_data,axis=0)
             std=np.std(control_data,axis=0)
-            io.save_mgh(control_dir+h+'.mu'+m,mean,demo)
-            io.save_mgh(control_dir+h+'.std'+m,mean,demo)
+            io.save_mgh(os.path.join(control_dir,f,h+'.mu'+m),mean,demo)
+            io.save_mgh(os.path.join(control_dir,f,h+'.std'+m),std,demo)
 
 
 #count how many FLAIR controls
@@ -97,8 +97,8 @@ for f in fields:
                 control_data[k]=io.import_mgh(subject_dir+s+'/xhemi/surf_meld/'+h+m)
             mean=np.mean(control_data,axis=0)
             std=np.std(control_data,axis=0)
-            io.save_mgh(control_dir+h+'.mu'+m,mean,demo)
-            io.save_mgh(control_dir+h+'.std'+m,mean,demo)
+            io.save_mgh(os.path.join(control_dir,f,h+'.mu'+m),mean,demo)
+            io.save_mgh(os.path.join(control_dir,f,h+'.std'+m),std,demo)
 
 
 
