@@ -25,7 +25,7 @@ bash "$script_dir"move_to_xhemi_flip.sh "$subjects_dir" "$subject_ids"
 echo "Moving lesion masks to template surface"
 bash "$script_dir"lesion_labels.sh "$subjects_dir" "$subject_ids"
 
-#calculates if there are enough (>25) controls
+#calculates if there are enough (>20) controls
 #create the mu and std overlays for  normalisation of controls and patients
 python "$script_dir"create_control_subjects.py "$subjects_dir" "$subject_ids" "$script_dir"template_control/
 

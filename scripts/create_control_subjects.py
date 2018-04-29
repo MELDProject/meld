@@ -58,7 +58,7 @@ for f in fields:
     total_number = len(control_subjects)
 
     if total_number < 20:
-        print("Found " + str(total_number)+ "controls. As this is less than 25, we will use MELD template controls for normalisation step")
+        print("Found " + str(total_number)+ "controls. As this is less than 20, we will use MELD template controls for normalisation step")
         break
     print("Creating T1 control means and stds")
 
@@ -84,7 +84,7 @@ for f in fields:
 
 
     if len(flair_controls) < 20:
-        print("Found " + str(len(flair_controls))+ " FLAIR controls. As this is less than 25, we will use MELD template FLAIR controls for normalisation step")
+        print("Found " + str(len(flair_controls))+ " FLAIR controls. As this is less than 20, we will use MELD template FLAIR controls for normalisation step")
         break
     print("Creating control FLAIR means and stds")
 
