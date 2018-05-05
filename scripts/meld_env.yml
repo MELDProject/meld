@@ -1,19 +1,10 @@
 name: meld_env
-channels:
-- defaults
-dependencies:
-- numpy=1.14.1
-- openssl=1.0.2l=0
-- pip=9.0.1=py27_1
-- python=2.7.13=0
-- readline=6.2=2
-- setuptools=36.4.0=py27_1
-- sqlite=3.13.0=0
-- tk=8.5.18=0
-- wheel=0.29.0=py27_0
-- zlib=1.2.11=0
-- pip:
-  - nibabel==2.2.1
-  - six==1.11.0
-prefix: /Users/sophie/anaconda2/envs/meld_env
 
+dependencies:
+  - python=2.7
+  - numpy
+  - h5py
+  - os
+  - argparse
+  - pip:
+    - nibabel
