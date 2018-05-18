@@ -42,15 +42,15 @@ for h in hemis:
         cortex=nb.freesurfer.io.read_label(os.path.join(subject_dir , s , 'label', h+'.cortex.label')
         for m in measures:
             if not os.path.isfile(os.path.join(subject_dir , s , 'surf_meld',h+'.intra_z'+m):
-                subject_measure=io.load_mgh(os.path.join(subject_dir,s,'surf_meld',h+m)
+                subject_measure=io.load_mgh(os.path.join(subject_dir,s,'surf_meld',h+m))
                 z_measure=(subject_measure-np.mean(subject_measure[cortex]))/np.std(subject_measure[cortex])
-                io.save_mgh(os.path.join(subject_dir,s,'surf_meld',h+'.intra_z'+m,z_measure,demo)
+                io.save_mgh(os.path.join(subject_dir,s,'surf_meld',h+'.intra_z'+m),z_measure,demo)
         #only do FLAIR measures if present
-        if os.path.isfile(os.path.join(subject_dir , s , 'surf_meld',h+flair_measures[0]):
+        if os.path.isfile(os.path.join(subject_dir , s , 'surf_meld',h+flair_measures[0])):
             for m in flair_measures:
-                if not os.path.isfile(os.path.join(subject_dir , s , 'surf_meld',h+'.intra_z'+m):
-                    subject_measure=io.load_mgh(os.path.join(subject_dir , s, 'surf_meld',h+m)
+                if not os.path.isfile(os.path.join(subject_dir , s , 'surf_meld',h+'.intra_z'+m)):
+                    subject_measure=io.load_mgh(os.path.join(subject_dir , s, 'surf_meld',h+m))
                     z_measure=(subject_measure-np.mean(subject_measure[cortex]))/np.std(subject_measure[cortex])
-                    io.save_mgh(os.path.join(subject_dir , s, 'surf_meld', h+'.intra_z'+m,z_measure,demo)
+                    io.save_mgh(os.path.join(subject_dir , s, 'surf_meld', h+'.intra_z'+m),z_measure,demo)
 
 
