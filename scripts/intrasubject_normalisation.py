@@ -39,9 +39,9 @@ demo=nb.load(os.path.join(subject_dir,subject_ids[0],'surf_meld',hemis[0]+measur
 for h in hemis:
     for s in subject_ids:
         demo=nb.load(os.path.join(subject_dir,s,'surf_meld',h+measures[0]))
-        cortex=nb.freesurfer.io.read_label(os.path.join(subject_dir , s , 'label', h+'.cortex.label')
+        cortex=nb.freesurfer.io.read_label(os.path.join(subject_dir , s , 'label', h+'.cortex.label'))
         for m in measures:
-            if not os.path.isfile(os.path.join(subject_dir , s , 'surf_meld',h+'.intra_z'+m):
+            if not os.path.isfile(os.path.join(subject_dir , s , 'surf_meld',h+'.intra_z'+m)):
                 subject_measure=io.load_mgh(os.path.join(subject_dir,s,'surf_meld',h+m))
                 z_measure=(subject_measure-np.mean(subject_measure[cortex]))/np.std(subject_measure[cortex])
                 io.save_mgh(os.path.join(subject_dir,s,'surf_meld',h+'.intra_z'+m),z_measure,demo)
