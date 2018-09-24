@@ -4,7 +4,7 @@ subject_list="List_subjects.txt"
 script_dir="$MELD_DIR"/scripts/
 echo $SUBJECT_DIR
 cd "$SUBJECT_DIR"
-export SUBJECTS_DIR="$SUBJECTS_DIR"
+export SUBJECTS_DIR="$SUBJECT_DIR"
 ## Import list of subjects
 subjects=$(<"$subject_list")
 
